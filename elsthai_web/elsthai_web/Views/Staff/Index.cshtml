@@ -1,0 +1,105 @@
+﻿@model IEnumerable<elsthai_web.Models.Staff>
+@{
+    ViewBag.Title = "Index";
+
+    int index = 1;
+}
+    <html lang="en">
+    <head>
+        <style>
+            * {
+                font-family: 'Bai Jamjuree', sans-serif;
+            }
+
+            #project td, #project th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+
+            #project tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            #project tr:hover {
+                background-color: #ddd;
+            }
+
+            #project th {
+                width: 90px;
+                padding-top: 8px;
+                padding-bottom: 8px;
+                text-align: center;
+                background-color: #78e08f;
+                color: black;
+            }
+
+            .button {
+                background-color: #2ed573;
+                border: none;
+                color: white;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+            }
+
+            .button1 {
+                padding: 8px 8px;
+            }
+
+            .button2 {
+                padding: 8px 8px;
+                background-color: #B03A2E;
+            }
+        </style>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>staff</title>
+        </head>
+    <body text="black">
+        <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+
+        <h3 align="center">ข้อมูลพนักงาน</h3>
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table id="project" width="90%" align="center">
+            <tr>
+                <th>ลำดับ</th>
+                <th>ชื่อ-นามสกุล</th>
+                <th>เบอร์โทรศัพท์</th>
+                <th>อีเมล</th>
+                <th>สถานะ</th>
+
+            </tr>
+
+            <tbody>
+                @foreach (var db in Model)
+                {
+                    <tr>
+                        @if (db.isdelete == "0")
+                        {
+                            <td align="center">@index</td>
+                            <td>@db.name</td>
+                            <td>@db.phone</td>
+                            <td>@db.email</td>
+
+
+                            <td align="center">
+                                @Html.ActionLink("Edit", "Edit", new { staff_id = db.staff_id, password_staff = db.password_staff, name = db.name, phone = db.phone, email = db.email, isdelete = db.isdelete })
+                                @Html.ActionLink("Details", "Details", new { staff_id = db.staff_id, password_staff = db.password_staff, name = db.name, phone = db.phone, email = db.email, isdelete = db.isdelete })
+                                @Html.ActionLink("Delete", "Delete", new { staff_id = db.staff_id, password_staff = db.password_staff, name = db.name, phone = db.phone, email = db.email, isdelete = db.isdelete })
+                            </td>
+                        }
+
+                    </tr>
+                }
+            </tbody>
+            <tr>
+            </tr>
+        </table>
+
+    </body>
+</html>

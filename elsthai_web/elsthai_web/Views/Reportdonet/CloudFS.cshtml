@@ -1,0 +1,172 @@
+﻿<!DOCTYPE gtml>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    Name    <input type="NameTbox" type="text" oninput="Update(this.value,'name')">
+    RollNo  <input type="RollTbox" type="text" oninput="Update(this.value,'roll')">
+    Section <input type="SecTbox" type="text" oninput="Update(this.value,'sec')">
+    Gender  <input type="GenTbox" type="text" oninput="Update(this.value,'gen')">
+    <hr>
+    <button id="insertBtn">INSERT</button>
+    <button id="selectBtn">SELECT</button>
+    <button id="updateBtn">UPDATE</button>
+    <button id="deleteBtn">DELETE</button>
+
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
+
+    <script id="MainScript">
+
+        let NameT = document.getElementById('NameTbox');
+        let RollT = document.getElementById('RollTbox');
+        let SecT = document.getElementById('SecTbox');
+        let GenT = document.getElementById('GenTbox');
+
+        let nameV = NameT.value;
+        let rollV = RollTbox.value;
+        let secV = SecTbox.value;
+        let genV = GenTbox.value;
+
+        function Update(val, type) {
+            if (type == 'name') nameV = val;
+            else if (type == 'roll') rollV = val;
+            else if (type == 'sec') secV = val;
+            else if (type == 'gen') genV = val;
+        }
+
+        //**********************donfiguartion*****************************//
+
+        /*เติม const ที่ต้อง Copy ใน firebase ในคลิป 7:08 นาที*/
+
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyDAmC5P4Yz1AA1fsZs_vkFmOvkkRoU2u7Y",
+            authDomain: "kcs-database.firebaseapp.com",
+            databaseURL: "https://kcs-database.firebaseio.com",
+            projectId: "kcs-database",
+            storageBucket: "kcs-database.appspot.com",
+            messagingSenderId: "942140079361",
+            appId: "1:942140079361:web:d06709c7bafe9440c2ef00",
+            measurementId: "G-63XXEQFVS1"
+        };
+
+
+        firebase.initializeApp(firebaseConfig);
+        let cloudDB = firebase.firestore();
+
+        //***********************Writing Data*****************************
+
+        //---Add Document with Auto Generated ID
+        function Add_Doc_WithAutoID() {
+            cloudDB.collection("Students").add(
+                {
+                    NameOfStd: nameV,
+                    RollNo: Number(rollV),
+                    Section: secV,
+                    Gender: genV
+                }
+            )
+                .then(function (docRef) {
+                    console.log("Document written with ID", docRef.id);
+                })
+                .cath(function (error) {
+                    console.log("Error adding document", error);
+                })
+        }
+
+        //---Add Document with Custom ID
+        function Add_Doc_WithID() {
+            cloudDB.collection("Students").doc(rollV).set(
+                {
+                    NameOfStd: nameV,
+                    RollNo: Number(rollV),
+                    Section: secV,
+                    Gender: genV
+                }
+            )
+                .then(function () {
+                    console.log("Document written with ID", rollV);
+                })
+                .cath(function (error) {
+                    console.log("Error adding document", error);
+                })
+        }
+
+        //**********************Updating Data*******************************
+
+        //---Update Fields insert a document
+        function Update_Fields_inDocument() {
+            cloudDB.collection("Students").doc(rollV).update(
+                {
+                    NameOfStd: nameV,
+                    Section: secV,
+                    Gender: genV
+                }
+            )
+                .then(function () {
+                    console.log("Document updated with ID", rollV);
+                })
+                .cath(function (error) {
+                    console.log("Error updating document", error);
+                })
+        }
+
+        //**********************Delteing Data*******************************
+
+        //---Delete a document
+        function DeleteDocument() {
+            cloudDB.collection("Students").doc(rollV).delete()
+                .then(function () {
+                    console.log("Document deleted with ID", rollV);
+                })
+                .cath(function (error) {
+                    console.log("Error deleting document", error);
+                })
+        }
+
+        //**********************Reading Data*******************************
+
+        //---Retrieve Data within a document
+        function RetrieceData_inDocument() {
+            cloudDB.collection("Students").doc(rollV).get()
+                .then(function (doc) {
+                    if (doc.exists) {
+                        NameT.value = doc.data().NameOfStd;
+                        SecT.value = doc.data().Section;
+                        GenT.value = doc.data().Gender;
+                    }
+                    else {
+                        console.log("doc does not exist");
+                    }
+                })
+                .cath(function (error) {
+                    console.log("error", error);
+                })
+        }
+
+        //**********************Button Events*****************************
+
+        document.getElementById('insertBtn').onclick = function () {
+            Add_Doc_WithID();
+
+        }
+
+        document.getElementById('selectBtn').onclick = function () {
+
+        }
+
+        document.getElementById('updateBtn').onclick = function () {
+            Update_Fields_inDocument();
+        }
+
+        document.getElementById('deleteBtn').onclick = function () {
+            DeleteDocument();
+        }
+    </script>
+
+
+</body>
+</html>

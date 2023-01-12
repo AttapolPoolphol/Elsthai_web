@@ -1,0 +1,115 @@
+﻿@model elsthai_web.Models.User;
+@{
+    ViewBag.Title = "Edit";
+    var db = ViewData["data"] as User;
+}
+<br>
+<h2>แก้ไขผู้ใช้งาน</h2>
+<html>
+<head>
+    <style>
+        .BtnUpdate {
+            padding: 8px 8px;
+            background-color: #B03A2E;
+        }
+    </style>
+</head>
+<body >
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="card-title"></h4>
+                <div class="form-group row">
+                    <label for="example-text-input" class="col-sm-2 col-form-label">อีเมล</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" id="email" name="email" value="@db.email" id="example-text-input" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="example-text-input" class="col-sm-2 col-form-label">ชื่อ-นามสกุล</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" id="name" name="name" value="@db.name">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="example-text-input" class="col-sm-2 col-form-label">เบอร์โทรศัพท์</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" id="phone" name="phone" value="@db.phone">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="example-text-input" class="col-sm-2 col-form-label">รหัสผ่าน</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="password" id="password_user" name="password_user" value="@db.password_user">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-10" align="center">
+                        <button id="BtnUpdate" style="background-color: #ea8685;" >ยืนยันการแก้ไข</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>          
+            <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
+            <script>
+        //ประกาศตัวแปรรับค่า
+
+
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyDAmC5P4Yz1AA1fsZs_vkFmOvkkRoU2u7Y",
+            authDomain: "kcs-database.firebaseapp.com",
+            databaseURL: "https://kcs-database.firebaseio.com",
+            projectId: "kcs-database",
+            storageBucket: "kcs-database.appspot.com",
+            messagingSenderId: "942140079361",
+            appId: "1:942140079361:web:d06709c7bafe9440c2ef00",
+            measurementId: "G-63XXEQFVS1"
+        };
+
+
+        firebase.initializeApp(firebaseConfig);
+        let firestore = firebase.firestore()
+        let idemail = email;
+        ////
+        function Update() {
+            var name = document.getElementById('name').value;
+            var phone = document.getElementById('phone').value;
+            var email = document.getElementById('email').value;
+            var pass = document.getElementById('password_user').value;
+            console.log("1  ");
+            console.log(name, phone, email, pass);
+            
+            firestore.collection("userProfile").doc(email).update({
+                birth: "000",
+                email: email,
+                name: name,
+                pass: pass,
+                phone: phone
+            }).then(function (doc) {
+
+                console.info(doc.email)
+                console.log("ผ่าน");
+            }).catch(function (error) {
+
+                console.error(error)
+                alert("Saved successfully");
+                window.location.href = "/user/index";
+            });
+        }
+
+                document.getElementById('BtnUpdate').onclick = function () {
+            Update();
+        }
+
+
+
+            </script>
+            </body>
+            </html>

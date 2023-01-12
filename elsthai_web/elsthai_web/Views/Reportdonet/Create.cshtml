@@ -1,0 +1,175 @@
+﻿@model elsthai_web.Models.Reportdonet;
+@{
+    ViewBag.Title = "Create";
+
+    var db = ViewData["data"] as Reportdonet;
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        * {
+            font-family: 'Bai Jamjuree', sans-serif;
+            box-sizing: border-box;
+        }
+
+        h3 {
+            margin-top: 8%;
+        }
+
+        input[type=text], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        label {
+            padding: 12px 12px 12px 0;
+            display: inline-block;
+        }
+
+        .button {
+            background-color: #2ed573;
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .button1 {
+            padding: 8px 8px;
+        }
+
+        .button2 {
+            padding: 8px 8px;
+        }
+
+        .container {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+            margin-left: 20%;
+        }
+
+        .col-25 {
+            float: left;
+            width: 15%;
+            margin-top: 6px;
+        }
+
+        .col-70 {
+            float: left;
+            width: 600px;
+            margin-top: 6px;
+        }
+
+        .col-75 {
+            float: left;
+            width: 750px;
+            margin-top: 6px;
+        }
+
+        .col-80 {
+            float: left;
+            width: 155px;
+            margin-top: 6px;
+        }
+
+        .col-85 {
+            float: left;
+            width: 200px;
+            margin-top: 6px;
+        }
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add</title>
+</head>
+<body>
+    <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+
+    <h3 align="center">สร้างใบเสร็จ</h3>
+    <div class="container" align="center">
+        <form method="post">
+            <div class="row" align="center">
+                <div class="row">
+                    <div class="col-25">
+                        <label for="fname">ชื่อ-นามสกุล</label>
+                    </div>
+                    <div class="col-70">
+                        <input type="text" id="name_user" name="name_user" value="" placeholder="ระบุชื่อ">
+                    </div>
+                </div>
+                <div class="col-25">
+                    <label for="subject">โครงการ</label>
+                </div>
+                <div class="col-85">
+                   
+
+                    <select id="subject" name="donateproject">
+                        <option value="บริจาคทุนการศึกษา">บริจาคทุนการศึกษา</option>
+                        <option value="บริจาคเพื่อทุนอาชีพ">บริจาคเพื่อทุนอาชีพ</option>
+                        <option value="บริจาคระดมทุน">บริจาคระดมทุน</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="fname">จำนวนเงิน</label>
+                </div>
+                <div class="col-80">
+                    <input type="text" id="price" name="price" value="" placeholder="จำนวนเงิน..">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="subject">ช่องทางการชำระ</label>
+                </div>
+                <div class="col-85">
+                    <select id="subject" name="money">
+                        <option value="เงินสด">เงินสด</option>
+                        <option value="เงินโอน">เงินโอน</option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="subject">ธนาคาร</label>
+                </div>
+                <div class="col-85">
+                    <select id="subject" name="bank">
+                        <option value="กสิกร">กสิกรไทย</option>
+                        <option value="ไทพาณิชย์">ไทยพาณิชย์</option>
+
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="row" align="center">
+                <button class="button button1" style="width: 90px;">เพิ่ม</button>
+            </div>
+
+        </form>
+    </div>
+
+</body>
+</html>
+
+
+

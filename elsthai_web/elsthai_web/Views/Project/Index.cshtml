@@ -1,0 +1,80 @@
+﻿@model IEnumerable<elsthai_web.Models.Project>
+@{
+    ViewBag.Title = "Index";
+
+    int index = 1;
+}
+
+<html lang="en">
+<head>
+    <style>
+        * {
+            font-family: 'Bai Jamjuree', sans-serif;
+        }
+
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elsthai Admin</title>
+</head>
+<body text="black">
+    <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+
+    <h3 align="center">โครงการ</h3>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+
+    <table border="1"  style="width: 90%;" align="center">
+        <tr style="height: 60px;">
+            <td align="center" style="background-color: #78e08f; width: 15%;">
+                ลำดับ
+            </td>
+            <td align="center" style="width: 15%; background-color: #78e08f;">
+                ประเภทโครงการ
+            </td>
+            <td align="center" style="width: 25%; background-color: #78e08f;">
+                ชื่อโครงการ
+            </td>
+            <td align="center" style="width: 7%; background-color: #78e08f;">
+                เป้าหมาย
+            </td>
+            <td align="center" style="width: 40%; background-color: #78e08f;">
+                รายละเอียดโครงการ
+            </td>
+            <td align="center" style="width: 30%; background-color: #78e08f;">
+                จัดการ
+            </td>
+        </tr>
+        <tbody>
+            @foreach (var db in Model)
+            {
+            <tr>
+                @if (db.isdelete == "0")
+                {
+                    <td align="center">@index</td>
+                    <td>@db.type</td>
+                    <td>@db.nameproject</td>
+                    <td align="center">@db.goal</td>
+                    <td>@db.detail</td>
+                    
+                    <td align="center">
+                        @Html.ActionLink("Edit", "Edit", new { project_id = db.project_id })
+                        @Html.ActionLink("Delete", "Delete", new { project_id = db.project_id })
+                    </td>
+                }
+            </tr>
+                index++;
+            }
+        </tbody>
+    </table>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
+            integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
+            crossorigin="anonymous"></script>
+    <script>
+        feather.replace()
+    </script>
+</body>
+</html>

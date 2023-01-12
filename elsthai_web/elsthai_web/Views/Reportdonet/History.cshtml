@@ -1,0 +1,123 @@
+﻿@{
+    ViewBag.Title = "History";
+    var db = ViewData["data"] as User;
+}
+<html>
+<head>
+    <style>
+        * {
+            font-family: 'Bai Jamjuree', sans-serif;
+        }
+
+        #tbresult td, #tbresult th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #tbresult tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #tbresult tr:hover {
+            background-color: #ddd;
+        }
+
+        #tbresult th {
+            width: 90px;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            text-align: center;
+            background-color: #78e08f;
+            color: black;
+        }
+        h2 {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body text="black">
+    <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+
+    <div class="container">
+        <h2 align="center">รายงานการบริจาค</h2>
+        <input type="hidden" id="email" name="email" value="@db.email" />
+        <table class="" id="tbresult"  width="90%" align="center">
+            <tr>
+                <th>ชื่อ-นามสกุล</th>
+                <th>ธนาคารปลายทาง</th>
+                <th>จำนวนเงิน</th>
+                <th>ชื่อโครงการ</th>
+                <th>เลข4ตัวท้ายบัญชี</th>
+                <th>หลักฐานการโอน</th>
+                <th>ใบเสร็จ</th>
+            </tr>
+
+        </table>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
+
+    <script>
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyDAmC5P4Yz1AA1fsZs_vkFmOvkkRoU2u7Y",
+            authDomain: "kcs-database.firebaseapp.com",
+            databaseURL: "https://kcs-database.firebaseio.com",
+            projectId: "kcs-database",
+            storageBucket: "kcs-database.appspot.com",
+            messagingSenderId: "942140079361",
+            appId: "1:942140079361:web:d06709c7bafe9440c2ef00",
+            measurementId: "G-63XXEQFVS1"
+        };
+
+
+        firebase.initializeApp(firebaseConfig);
+        //let cloudDB = firebase.firestore();
+        let firestore = firebase.firestore()
+
+        ////
+        console.log("1");
+        console.log("2");
+        let email = document.getElementById('email').value;
+        let hi = "ประวัติการโอน";
+        //let email = "tairat.n@ku.th";
+        console.log(email);
+        firestore.collection("slip").doc(email).collection(hi).get().then((snapshot) => {
+            snapshot.forEach(doc => {
+                console.log(doc.data());
+                showData(doc);
+                console.log("3");
+            })
+        });
+
+        const table = document.querySelector('#tbresult');
+
+        ///
+        function showData(doc) {
+            console.log(doc.data());
+            var row = table.insertRow(-1);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+            var cell5 = row.insertCell(4);
+            var cell6 = row.insertCell(5);
+            var cell7 = row.insertCell(6);
+
+            cell1.innerHTML = doc.data().name;
+            cell2.innerHTML = doc.data().bank;
+            cell3.innerHTML = doc.data().Volume;
+            cell4.innerHTML = doc.data().project;
+            cell5.innerHTML = doc.data().AccountNumber;
+            cell6.innerHTML = "<a href='" + doc.data().filepath + "'>หลักฐานการโอน</a>";
+            cell7.innerHTML = "<a href='/Reportdonet/Receipt?name=" + doc.data().name + "&AccountNumber=" + doc.data().AccountNumber + "&project=" + doc.data().project + "&Volume=" + doc.data().Volume + "&bank=" + doc.data().bank + "'>ใบเสร็จ</a>";
+
+
+
+
+        }
+    </script>
+</body>
+</html>

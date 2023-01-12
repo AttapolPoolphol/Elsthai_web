@@ -1,0 +1,254 @@
+﻿@using Microsoft.Extensions.Configuration;
+@using Microsoft.AspNetCore.Identity;
+
+
+@{
+    string role = null;
+    var baseurl = "https://localhost:44316/";
+    string rolename = null;
+    string user = "";
+
+}
+<!DOCTYPE html>
+<a href="C:\Users\early\Downloads\elsthai_web\elsthai_web\Views\Shared\_Layout.cshtml">C:\Users\early\Downloads\elsthai_web\elsthai_web\Views\Shared\_Layout.cshtml</a>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesbrand" name="author" />
+    <title>@ViewData["Title"] Web Elsthai </title>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="@{@baseurl}assets/images/logo.png">
+    <link href="@{@baseurl}assets/libs/chartist/chartist.min.css" rel="stylesheet">
+    <!-- Sweet Alert-->
+    <link href="@{@baseurl}assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <!-- Bootstrap Css -->
+    <link href="@{@baseurl}assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="@{@baseurl}assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="@{@baseurl}assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Bai Jamjuree', sans-serif;
+        }
+
+        td.center1 {
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th.center1 {
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        img.resize {
+            width: 32px;
+            height: 32px;
+            border: 0;
+        }
+
+        img:hover.resize {
+            width: 128px;
+            height: 128px;
+            border: 0;
+        }
+
+        h3.logohead {
+            margin-top: 3%;
+        }
+    </style>
+</head>
+
+<body>
+    <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+
+        <header id="page-topbar">
+            <div class="navbar-header">
+                <div class="d-flex">
+                    <!-- LOGO -->
+                    <div class="navbar-brand-box">
+                        <a href="index.html" class="logo logo-dark">
+                            <span class="logo-sm">
+                                <img src="@{@baseurl}assets/images/logo.png" alt="" height="90">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="@{@baseurl}assets/images/logo.png" alt="" height="70">
+                            </span>
+                        </a>
+
+                        <a href="index.html" class="logo logo-light">
+                            <span class="logo-sm">
+                                <img src="@{@baseurl}assets/images/logo.png" alt="" height="60">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="@{@baseurl}assets/images/logo.png" alt="" height="60">
+                            </span>
+                        </a>
+                    </div>
+
+                    <h3 class="logohead">มูลนิธิการศึกษาเพื่อชีวิตและสังคม</h3>
+
+                </div>
+
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-expanded="false">
+                        Hello, Waranya
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li><a href="@{@baseurl}staff/login" class="dropdown-item">ออกจากระบบ</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="vertical-menu">
+
+            <div data-simplebar class="h-100">
+
+                <!--- Sidemenu -->
+                <!-- Left Menu Start -->
+                <ul class="metismenu list-unstyled" id="side-menu">
+                    <li class="menu-title"></li>
+                    <li>
+                        <a href="@{@baseurl}Reportdonet/index" class="home">
+                            <i class="home"></i>
+                            <span>หน้าแรก</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="has-arrow waves-effect">
+                            <i class="edit"></i>
+                            <span>จัดการข้อมูลผู้ใช้งาน</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li>
+                                <a href="@{@baseurl}user/index">
+                                    ข้อมูลผู้ใช้งาน
+                                </a>
+                            </li>
+                            <li><a href="@{@baseurl}user/create">เพิ่มผู้ใช้งาน</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="has-arrow waves-effect">
+                            <i class="edit"></i>
+                            <span>จัดการข้อมูลพนักงาน</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="@{@baseurl}staff/index">ข้อมูลพนักงาน</a></li>
+                            <li><a href="@{@baseurl}staff/create">เพิ่มข้อมูลพนักงาน</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="has-arrow waves-effect">
+                            <i class="edit"></i>
+                            <span>จัดการข้อมูลโครงการ</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="@{@baseurl}project/index">ข้อมูลโครงการ</a></li>
+                            <li><a href="@{@baseurl}project/create">เพิ่มข้อมูลโครงการ</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="@{@baseurl}reportdonet/index" class="waves-effect">
+                            <i class="ion ion-ios-person"></i>
+                            <span>รายการบริจาค</span>
+                        </a>
+                    </li>
+                </ul>
+
+
+            </div>
+            <!-- Sidebar -->
+        </div>
+    </div>
+    <!-- Left Sidebar End -->
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                @*<div class="row align-items-center">
+                        <div class="col-sm-6">
+                            <div class="page-title-box">
+                                <h4 class="font-size-18">Blank</h4>
+                                <ol class="breadcrumb mb-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Veltrix</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Extra Pages</a></li>
+                                    <li class="breadcrumb-item active">Blank</li>
+                                </ol>
+                            </div>
+                        </div>
+
+                    </div>*@
+                <!-- end page title -->
+                @RenderBody()
+
+            </div> <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <!--©
+                        <script>document.write(new Date().getFullYear())</script> Veltrix<span class="d-none d-sm-inline-block"> - Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand.</span>-->
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- end main content-->
+    </div>
+
+
+    </div> <!-- end slimscroll-menu-->
+    </div>
+
+    <!-- /Right-bar -->
+    <!-- Right bar overlay-->
+    <div class="rightbar-overlay"></div>
+
+    <!-- JAVASCRIPT -->
+    <script src="@{@baseurl}assets/libs/jquery/jquery.min.js"></script>
+    <script src="@{@baseurl}assets/libs/metismenu/metisMenu.min.js"></script>
+    <script src="@{@baseurl}assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="@{@baseurl}assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="@{@baseurl}assets/libs/node-waves/waves.min.js"></script>
+    <!-- Sweet Alerts js -->
+    <script src="@{@baseurl}assets/libs/sweetalert2/sweetalert2.min.js"></script>
+
+    <!-- Sweet alert init js-->
+    <script src="@{@baseurl}assets/js/pages/sweet-alerts.init.js"></script>
+    <!-- Peity chart-->
+    <script src="@{@baseurl}assets/libs/peity/jquery.peity.min.js"></script>
+
+    <!-- Plugin Js-->
+    <script src="@{@baseurl}assets/libs/chartist/chartist.min.js"></script>
+
+
+    <script src="@{@baseurl}assets/js/app.js"></script>
+    @RenderSection("Scripts", required: false)
+
+    <script>
+        feather.replace()
+    </script>
+
+</body>
+</html>
+

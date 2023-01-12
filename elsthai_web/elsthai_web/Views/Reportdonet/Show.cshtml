@@ -1,0 +1,80 @@
+﻿@model IEnumerable<elsthai_web.Models.Reportdonet>
+@{
+    ViewBag.Title = "Index";
+}
+<h2>Index</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<html>
+<head>
+    <style>
+        * {
+            font-family: 'Bai Jamjuree', sans-serif;
+        }
+
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+            #customers td, #customers th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+
+            #customers tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            #customers tr:hover {
+                background-color: #ddd;
+            }
+
+            #customers th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #4CAF50;
+                color: white;
+            }
+    </style>
+</head>
+<body>
+    <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+    <h2>รายงานการบริจาค</h2>
+
+    <table id="customers">
+        <tr>
+            <th>ชื่อ-นามสกุล</th>
+
+            <th>ธนาคารปลายทาง</th>
+            <th>จำนวนเงิน</th>
+            <th>โครงการ</th>
+            <th>เลข4ตัวท้ายบัญชี</th>
+            <th>ใบเสร็จ</th>
+        </tr>
+        <tbody>
+            @foreach (var db in Model)
+            {
+                <tr>
+
+                    <td>@db.name_user</td>
+
+                    <td>@db.bank</td>
+                    <td>@db.price</td>
+                    <td>@db.donateproject</td>
+                    <td>@db.no</td>
+                    <td>
+                        @Html.ActionLink("Receipt", "Receipt", new { reportdonet_id = db.reportdonet_id })
+
+                    </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</body>
+</html>

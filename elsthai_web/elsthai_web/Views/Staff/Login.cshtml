@@ -1,0 +1,116 @@
+﻿@{
+    var baseurl = "https://localhost:44316/";
+}
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<html lang="en">
+<head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Nanum Myeongjo', serif;
+        }
+
+        .bgimg {
+            width: 100%;
+            height: 100vh;
+            background-image: linear-gradient(27deg, #ced6e0 50%, #dfe4ea 50%);
+        }
+
+        .centerdiv {
+            width: 350px;
+            height: 400px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            background-color: #FD7272;
+            transform: translate(-50%, -50%);
+            background-image: linear-gradient(27deg, #ced6e0 50%, #dfe4ea 50%);
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+        }
+
+        #profilepic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            position: relative;
+            top: -60px;
+            left: calc((350px - 120px) / 2)
+        }
+
+        h2 {
+            text-align: right;
+            color: black;
+            text-transform: uppercase;
+            font-size: 2em;
+            word-spacing: 10px;
+            margin-top: -50px;
+            margin-bottom: 50px;
+            margin-right: 40px;
+            text-shadow: -2px 2px 1 px #0A84C6;
+        }
+
+        .inputbox {
+            width: calc(100% - 40px);
+            height: 30px;
+            display: block;
+            margin: auto;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        ::placeholder {
+            letter-spacing: 2px;
+            color: black;
+        }
+
+        button .btn btn-primary {
+            width: calc(100% - 40px);
+            height: 35px;
+            display: block;
+            margin: auto;
+            color: white;
+            background-color: #0A84C6;
+            border: none;
+            position: relative;
+        }
+
+    </style>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="stylelogin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap" rel="stylesheet">
+</head>
+<body>
+    <form method="post">
+
+
+        <div class="bgimg">
+            <div class="centerdiv">
+                <img src="@{@baseurl}assets/images/user22.png" alt="" height= "120">
+                <h2>User login</h2>
+                <form>
+                    <div>
+                        <input type="text" name="email" class="inputbox"
+                               placeholder="Username">
+                    </div>
+                    <br>
+                    <div>
+                        <input type="Password" name="password_staff" class="inputbox"
+                               placeholder="Password">
+                    </div>
+                    <br>
+                    <div align="center">
+                        <button  type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

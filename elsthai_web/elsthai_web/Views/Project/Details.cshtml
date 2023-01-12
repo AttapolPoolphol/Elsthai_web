@@ -1,0 +1,49 @@
+﻿@model elsthai_web.Models.Project;
+@{
+    ViewBag.Title = "Details";
+    var db = ViewData["data"] as Project;
+}
+<h2>รายละเอียด โครงการ</h2>
+<form>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <h4 class="card-title">Details</h4>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-sm-2 col-form-label">ID</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="text" value="  @db.project_id" id="example-text-input" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="text" value="  @db.nameproject" id="example-text-input" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-sm-2 col-form-label">TYPE</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="text" value="  @db.type" id="example-text-input" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-sm-2 col-form-label">GOAL</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="text" value="  @db.goal" id="example-text-input" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-sm-2 col-form-label">DETAIL</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="text" value="  @db.detail" id="example-text-input" readonly>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div> <!-- end col -->
+    </div> <!-- end row -->
+</form>

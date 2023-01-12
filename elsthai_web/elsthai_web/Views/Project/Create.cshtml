@@ -1,0 +1,159 @@
+﻿@model elsthai_web.Models.Project;
+@{
+    ViewBag.Title = "Create";
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        * {
+            font-family: 'Bai Jamjuree', sans-serif;
+        }
+
+        input[type=text], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        label {
+            padding: 12px 12px 12px 0;
+            display: inline-block;
+        }
+
+        .button {
+            background-color: #2ed573;
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .button1 {
+            padding: 8px 15px;
+        }
+
+        .button2 {
+            padding: 8px 8px;
+        }
+
+        .container {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        .col-25 {
+            float: left;
+            width: 15%;
+            margin-top: 6px;
+        }
+
+        .col-70 {
+            float: left;
+            width: 600px;
+            margin-top: 6px;
+        }
+
+        .col-75 {
+            float: left;
+            width: 750px;
+            margin-top: 6px;
+        }
+
+        .col-80 {
+            float: left;
+            width: 155px;
+            margin-top: 6px;
+        }
+
+        .col-85 {
+            float: left;
+            width: 200px;
+            margin-top: 6px;
+        }
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add</title>
+</head>
+<body>
+    <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+
+    <h3 align="center">เพิ่มโครงการ</h3>
+    <div class="container" align="center">
+        <form asp-controller="Project" asp-action="Create" method="post" enctype="multipart/form-data">
+            <div class="row" align="center">
+                <div class="col-25">
+                    <label for="subject">ประเภทโครงการ</label>
+                </div>
+                <div class="col-85">
+                    <select id="type" name="type">
+                        <option value="บริจาคทุนการศึกษา">กรุณาเลือก</option>
+                        <option value="บริจาคทุนการศึกษา">บริจาคทุนการศึกษา</option>
+                        <option value="บริจาคเพื่อทุนอาชีพ">บริจาคเพื่อทุนอาชีพ</option>
+                        <option value="บริจาคระดมทุน">บริจาคระดมทุน</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="fname">ชื่อโครงการ</label>
+                </div>
+                <div class="col-70">
+                    <input type="text" id="nameproject" name="nameproject" value="" placeholder="ระบุชื่อโครงการ..">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="fname">เป้าหมาย</label>
+                </div>
+                <div class="col-80">
+                    <input type="text" id="goal" name="goal" value="" placeholder="จำนวนเงิน..">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="subject">รายละเอียดโครงการ</label>
+                </div>
+                <div class="col-75">
+                    <textarea id="detail" name="detail" placeholder="รายละเอียดโครงการ.." style="height:200px"></textarea>
+                    <input type="hidden" id="isdelete" name="isdelete" value="0">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">เลือกรูปภาพ</label>
+                <input type="file" id="file" name="file" multiple class="form-control" onchange="UploadFile(event)" />
+                <input type="file" id="file" name="file2" multiple class="form-control" onchange="UploadFile(event)" />
+                <input type="file" id="file" name="file3" multiple class="form-control" onchange="UploadFile(event)" />
+
+                <span class="text-danger"></span>
+            </div>
+
+            <div class="row" align="center">
+                <button class="button button1" style="width: 180px;">เพิ่มโครงการ</button>
+                
+            </div>
+
+        </form>
+    </div>
+
+</body>
+
+</html>
+
+
+

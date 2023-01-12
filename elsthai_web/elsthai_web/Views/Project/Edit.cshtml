@@ -1,0 +1,175 @@
+﻿@model elsthai_web.Models.Project;
+@{
+    ViewBag.Title = "Edit";
+    var db = ViewData["data"] as Project;
+}
+    <html lang="en">
+    <head>
+        <style>
+* {
+      font-family: 'Bai Jamjuree', sans-serif;
+      box-sizing: border-box;
+  }
+
+
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+.button {
+  background-color: #2ed573;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.button1 {padding: 8px 8px;}
+.button2 {padding: 8px 8px; background-color:#B03A2E;}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  /*margin-left: 20% ;*/
+}
+.col-25 {
+  float: left;
+  width: 15%;
+  margin-top: 6px;
+}
+.col-70 {
+  float: left;
+  width: 600px;
+  margin-top: 6px;
+}
+.col-75 {
+  float: left;
+  width: 750px;
+  margin-top: 6px;
+}
+.col-80 {
+    float: left;
+    width: 155px;
+    margin-top: 6px;
+}
+.col-85 {
+    float: left;
+    width: 200px;
+    margin-top: 6px;
+}
+.form-group img {
+    max-width: 300px;
+    height: auto !important;
+}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+        </style>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Edit</title>
+
+    </head>
+    <h2 align="center">แก้ไขโครงการ</h2>
+    <body>
+        <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+
+        <form  asp-controller="Project" asp-action="Edit" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <div class="container" align="center">
+
+                                <form method="post">
+                                    <div class="row" align="center">
+                                        <div class="col-25">
+                                            <label for="subject">ประเภทโครงการ</label>
+                                        </div>
+                                        <div class="col-85">
+                                            <input class="form-control" type="hidden" id="project_id" name="project_id" value="@db.project_id">
+                                            <select id="subject" name="subject">
+                                                <option value="@db.type">@db.type</option>
+                                                <option value="บริจาคทุนการศึกษา">กรุณาเลือก</option>
+                                                <option value="บริจาคทุนการศึกษา">บริจาคทุนการศึกษา</option>
+                                                <option value="บริจาคเพื่อทุนอาชีพ">บริจาคเพื่อทุนอาชีพ</option>
+                                                <option value="บริจาคระดมทุน">บริจาคระดมทุน</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-25">
+                                            <label for="fname">ชื่อโครงการ</label>
+                                        </div>
+                                        <div class="col-70">
+                                            <input type="text" id="nameproject" name="nameproject" value="@db.nameproject">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-25">
+                                            <label for="fname">เป้าหมาย</label>
+                                        </div>
+                                        <div class="col-80">
+                                            <input type="text" id="goal" name="goal" value="@db.goal">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-25">
+                                            <label for="subject">รายละเอียดโครงการ</label>
+                                        </div>
+                                        <div class="col-75">
+                                            <textarea id="detail" name="detail" style="height:200px">@db.detail</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+
+                                        <div class="col-sm-10">
+                                            <input class="form-control" type="hidden" id="isdelete" name="isdelete" value="@db.isdelete">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label">เลือกรูปภาพ</label>
+                                        <input type="file" id="file" name="file" value="@db.image" multiple class="form-control" onchange="UploadFile(event)" />
+                                        <input type="file" id="file" name="file2" value="@db.image2" multiple class="form-control" onchange="UploadFile(event)" />
+                                        <input type="file" id="file" name="file3" value="@db.image3" multiple class="form-control" onchange="UploadFile(event)" />
+                                        <img src="@db.image" />
+                                        <img src="@db.image2" />
+                                        <img src="@db.image3" />
+                                        <input class="form-control" type="hidden" id="image" name="image" value="@db.image">
+                                        <input class="form-control" type="hidden" id="image2" name="image2" value="@db.image2">
+                                        <input class="form-control" type="hidden" id="image3" name="image3" value="@db.image">
+                                        <span class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group row">
+
+                                        <div class="col-sm-10" align="center">
+                                            <button type="submit" class="btn btn-primary">ยืนยัน</button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div> <!-- end col -->
+                </div> <!-- end row -->
+        </form>
+    </body>
+</html>
